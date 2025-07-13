@@ -1,44 +1,133 @@
-# 🚗 Proof of Ride
+# 🚗 Proof of Ride — BlockDAG Hackathon 2025 Submission
 
-A decentralized ride-tracking system built for the BlockDAG Hackathon 2025. It captures ride start/end with GPS, stores metadata on IPFS, and records proofs on-chain via smart contracts.
-
----
-
-## 📌 Overview
-
-- ⛓️ Uses Polygon Amoy testnet + BlockDAG EVM
-- 🛰️ Records start & end ride with GPS
-- 🧾 Metadata saved on IPFS via Pinata
-- 🪙 On-chain NFT minted as proof of ride
+> A decentralized ride verification system that logs and mints rides as NFTs on-chain, verifying location, time, and authenticity.
 
 ---
 
-## 🧱 Tech Stack
+## 📌 Project Overview
 
-| Layer        | Tech                         |
-|--------------|------------------------------|
-| Frontend     | React Native (Expo)          |
-| Backend      | Node.js, Express.js          |
-| Blockchain   | Solidity, Hardhat, Ethers.js |
-| IPFS         | Pinata SDK                   |
-| Network      | Polygon Amoy Testnet         |
+**Proof of Ride** is a dApp that allows users to start/end a ride, captures their geolocation and timestamp, stores the data on IPFS, and mints a corresponding NFT on the Polygon Amoy Testnet via a smart contract deployed on a BlockDAG-compatible EVM.
 
 ---
 
-## 🔁 Workflow
+## 🌐 Tech Stack
 
-1. User taps “Start Ride”
-2. GPS location + timestamp fetched
-3. Metadata uploaded to Pinata (IPFS)
-4. Smart contract `mintProofOfRide()` is called with rideId & tokenURI
-5. User taps “End Ride” — same flow repeats
+| Layer        | Tech                                                                 |
+|--------------|----------------------------------------------------------------------|
+| Frontend     | React Native (Expo)                                                  |
+| Backend      | Node.js + Express.js                                                 |
+| Blockchain   | Solidity, Hardhat, Ethers.js                                         |
+| Storage      | Pinata + IPFS                                                        |
+| Network      | Polygon Amoy Testnet via Alchemy                                     |
+| Env Mgmt     | dotenv, react-native-dotenv                                          |
 
 ---
 
-## 🛠️ How to Run
+## 🔩 Features
 
-### 📦 Clone the Repo
+- 📍 Geolocation capture using Expo Location API
+- 📤 Uploads ride metadata to IPFS via Pinata
+- 🔐 Mints Proof-of-Ride NFTs with tokenURI
+- 🛠️ Backend server handles IPFS pinning
+- 📦 Environment variable support for keys (via `.env`)
+- 🔗 Smart contract fully deployed on Polygon Amoy Testnet
+
+---
+
+## 📲 Frontend Demo (React Native)
+
+- ✅ Start Ride → Logs location + uploads metadata → Mints NFT
+- ✅ End Ride → Same flow with separate metadata
+- 📋 View ride logs in real-time
+
+**Preview:**
+> Will be shown in demo video / screen recording
+
+---
+
+## 💻 Backend (Node.js)
+
+- `/startRide` & `/endRide`: Accepts ride data (location, time)
+- `/uploadMetadata`: Uploads metadata to IPFS, returns tokenURI
+- Uses Pinata SDK + dotenv for secure key access
+
+---
+
+## 💠 Smart Contract
+
+```solidity
+function mintProofOfRide(string memory rideId, string memory tokenURI) public {
+    _safeMint(msg.sender, tokenCounter);
+    _setTokenURI(tokenCounter, tokenURI);
+    rideIdToTokenId[rideId] = tokenCounter;
+    tokenCounter++;
+}
+```
+
+Deployed to: [Polygon Amoy Testnet](https://polygonscan.com/)
+
+---
+
+## 🧪 Testing
+
+- ✅ Local backend tested via Postman
+- ✅ TokenURI validated on IPFS
+- ✅ Contract calls confirmed via Alchemy dashboard
+
+---
+
+## 🚀 How to Run
 
 ```bash
-git clone https://github.com/<your-username>/proof-of-ride.git
-cd proof-of-ride
+# Backend
+cd backend
+npm install
+node server.js
+
+# Frontend
+cd frontend
+npm install
+expo start
+```
+
+---
+
+## 🛡️ Environment Variables (.env)
+
+```env
+PINATA_API_KEY=your_pinata_key
+PINATA_SECRET_API_KEY=your_secret_key
+ALCHEMY_RPC=https://polygon-amoy.g.alchemy.com/v2/your_key
+PRIVATE_KEY=your_wallet_private_key
+```
+
+---
+
+## 🎯 Future Scope
+
+- ⛽ Gasless minting via relayer
+- 🛣️ Route mapping of full rides
+- 🧑‍🤝‍🧑 Real-time driver-passenger interaction
+- 📊 Analytics dashboard for ride logs
+
+---
+
+## 🧑‍💻 Made By
+
+Herik Sevak — solo developer 💪
+
+GitHub: [github.com/HerikSevak](https://github.com/HerikSevak)
+
+---
+
+## 📽️ Demo Video
+
+> [Add link here after recording]
+
+---
+
+## 📝 Submission Details
+
+Hackathon: **BlockDAG Hackathon 2025**
+
+Track: **Infrastructure / Public Goods / dApps**

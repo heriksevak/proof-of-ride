@@ -1,0 +1,15 @@
+# Node modules
+**/node_modules/
+
+# Environment variables
+**/.env
+
+# Expo
+**/.expo/
+**/.expo-shared/
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
